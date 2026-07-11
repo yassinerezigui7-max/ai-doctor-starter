@@ -1,0 +1,170 @@
+/* ═══════════════════════════════════════════
+   CLIENT ONBOARDING INTAKE — page-specific styles
+   Builds on vip-intake.css (same card/field system).
+   Brand colors only:
+   #2F2FE4 blue · #162E93 navy · #1A1953 deep
+   #080616 bg · #FFD400 yellow (CTA/warn only)
+   ═══════════════════════════════════════════ */
+
+/* ===== STICKY PROGRESS (Section X of 6) ===== */
+.setup-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  background: rgba(8, 6, 22, 0.92);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(47, 47, 228, 0.18);
+  padding: 10px 20px 12px;
+}
+
+.setup-progress-track {
+  height: 4px;
+  background: rgba(47, 47, 228, 0.15);
+  border-radius: 99px;
+  overflow: hidden;
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.setup-progress-fill {
+  height: 100%;
+  width: 16%;
+  background: var(--blue);
+  border-radius: 99px;
+  transition: width 0.35s ease;
+}
+
+.setup-progress-label {
+  max-width: 760px;
+  margin: 6px auto 0;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-align: right;
+}
+
+/* Push header below the fixed progress bar */
+.vip-page .vip-header {
+  margin-top: 46px;
+}
+
+/* ===== BUSINESS HOURS GRID ===== */
+.hours-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.hours-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.hours-day {
+  width: 42px;
+  flex-shrink: 0;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.hours-time {
+  width: auto;
+  flex: 1;
+  max-width: 150px;
+  padding: 9px 10px;
+}
+
+.hours-sep {
+  color: var(--muted);
+  flex-shrink: 0;
+}
+
+.hours-row.is-closed .hours-time {
+  opacity: 0.35;
+}
+
+.hours-closed {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--muted);
+  cursor: pointer;
+  white-space: nowrap;
+  margin-left: 4px;
+}
+
+.hours-closed input {
+  accent-color: var(--blue);
+  width: 15px;
+  height: 15px;
+  cursor: pointer;
+}
+
+/* ===== CONSENT CHECKBOXES ===== */
+.setup-check {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 16px;
+  background: rgba(8, 6, 22, 0.6);
+  border: 1px solid rgba(47, 47, 228, 0.35);
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.setup-check:hover {
+  border-color: rgba(47, 47, 228, 0.6);
+}
+
+.setup-check input {
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  margin-top: 3px;
+  accent-color: var(--blue);
+  cursor: pointer;
+}
+
+.setup-check.invalid-check {
+  border-color: var(--yellow);
+  box-shadow: 0 0 0 3px rgba(255, 212, 0, 0.15);
+}
+
+/* ===== VALIDATION — force-show for grouped warnings ===== */
+.vip-warn.force-show {
+  display: block;
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 768px) {
+  .hours-row {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .hours-time {
+    max-width: 120px;
+    font-size: 16px; /* prevents iOS zoom */
+  }
+
+  .setup-progress {
+    padding: 8px 14px 10px;
+  }
+
+  .setup-progress-label {
+    font-size: 10px;
+  }
+}

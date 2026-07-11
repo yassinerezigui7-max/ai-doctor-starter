@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Client Onboarding Intake | cliniqboost</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css?v=6">
+  <link rel="stylesheet" href="css/vip-intake.css">
+  <link rel="stylesheet" href="css/intake-setup.css">
+</head>
+<body class="vip-page">
+
+  <!-- STICKY PROGRESS -->
+  <div class="setup-progress" aria-hidden="true">
+    <div class="setup-progress-track">
+      <div class="setup-progress-fill" id="setupProgressFill"></div>
+    </div>
+    <div class="setup-progress-label" id="setupProgressLabel">Section 1 of 6</div>
+  </div>
+
+  <!-- HEADER -->
+  <header class="vip-header">
+    <a href="/" class="vip-logo" aria-label="cliniqboost home">
+      <img src="assets/logo.png" alt="cliniqboost" height="34">
+    </a>
+  </header>
+
+  <!-- PAGE HERO -->
+  <section class="vip-hero">
+    <div class="vip-pill">Client Onboarding — System Setup</div>
+    <h1 class="vip-h1"><span class="vip-h1-blue">Client Onboarding</span> Intake</h1>
+    <p class="vip-sub">
+      Welcome to cliniqboost. This form gives us everything we need to configure
+      your clinic's AI system — your services, your hours, your voice, your data.
+      Six short sections. Takes about 15 minutes.
+    </p>
+    <p class="vip-autosave-note">Your answers save automatically as you type.</p>
+  </section>
+
+  <!-- FORM -->
+  <main class="vip-main">
+    <form id="setupForm" action="https://formspree.io/f/mojgalqa" method="POST" novalidate>
+      <input type="hidden" name="form_type" value="Client Onboarding Intake">
+      <input type="hidden" name="_subject" id="subjectField" value="New cliniqboost client intake">
+
+      <!-- SECTION 1 — CLINIC BASICS -->
+      <section class="vip-card" data-setup-section="1">
+        <div class="vip-card-head">
+          <div class="vip-num">01</div>
+          <div>
+            <h2 class="vip-card-title">Clinic Basics</h2>
+            <p class="vip-card-sub">Legal identity, contact details, location, and hours</p>
+          </div>
+        </div>
+        <div class="vip-grid">
+          <div class="vip-field vip-span2">
+            <label class="vip-label" for="legal_name">Legal business name <span class="vip-req">*</span></label>
+            <input class="vip-input" type="text" id="legal_name" name="legal_name" placeholder="e.g. Lumina Aesthetics LLC" required>
+            <div class="vip-warn">Please fill this in</div>
+          </div>
+          <div class="vip-field">
+            <label class="vip-label" for="dba_name">DBA / trading name</label>
+            <input class="vip-input" type="text" id="dba_name" name="dba_name" placeholder="If different from legal name">
+          </div>
+          <div class="vip-field">
+            <label class="vip-label" for="contact_name_role">Primary contact name + role <span class="vip-req">*</span></label>
+            <input class="vip-input" type="text" id="contact_name_role" name="contact_name_role" placeholder="e.g. Sarah Ahmed — Owner" required>
+            <div class="vip-warn">Please fill this in</div>
+          </div>
+          <div class="vip-field">
+            <label class="vip-label" for="contact_email">Primary contact email <span class="vip-req">*</span></label>
+            <input class="vip-input" type="email" id="contact_email" name="contact_email" placeholder="you@yourclinic.com" required>
+            <div class="vip-warn">Please enter a valid email</div>
+          </div>
+          <div class="vip-field">
+            <label class="vip-label" for="contact_mobile">Primary contact mobile phone <span class="vip-req">*</span></label>
+            <input class="vip-input" type="tel" id="contact_mobile" name="contact_mobile" placeholder="+1 305 555 0123" required>
+            <div class="vip-warn">Please fill this in</div>
+          </div>
+          <div class="vip-field">
+            <label class="vip-label" for="clinic_phone">Clinic's patient-facing phone number <span class="vip-req">*</span></label>
+            <input class="vip-input" type="tel" id="clinic_phone" name="clinic_phone" placeholder="The number patients call" required>
+            <div class="vip-warn">Please fill this in</div>
+          </div>
+          <div class="vip-field vip-span2">
+            <label class="vip-label" for="addr_street">Street address <span class="vip-req">*</span></label>
+            <input class="vip-input" type="text" id="addr_street" name="addr_street" placeholder="e.g. 420 Collins Ave, Suite 12" required>
+            <div class="vip-warn">Please fill this in</div>
+          </div>
+          <div class="vip-field">
+            <label class="vip-label" for="addr_city">City <span class="vip-req">*</span></label>
+            <input class="vip-input" type="text" id="addr_city" name="addr_city" required>
+            <div class="vip-warn">Please fill this in</div>
+          </div>
+          <div class="vip-field">
+            <label class="vip-label" for="addr_region">State / region <span class="vip-req">*</span></label>
+            <input class="vip-input" type="text" id="addr_region" name="addr_region" required>
+            <div class="vip-warn">Please fill this in</div>
+          </div>
+          <div class="vip-field">
+            <label class="vip-label" for="addr_country">Country <span class="vip-req">*</span></label>
+            <input class="vip-input" type="text" id="addr_country" name="addr_country" required>
+            <div class="vip-warn">Please fill this in</div>
+          </div>
+          <div class="vip-field">
+            <label class="vip-label" for="addr_postal">Postal code <span class="vip-req">*</span></label>
+            <input class="vip-input" type="text" id="addr_postal" name="addr_postal" required>
+            <div class="vip-warn">Please fill this in</div>
+          </div>
+          <div class="vip-field vip-span2">
+            <label class="vip-label" for="timezone">Timezone <span class="vip-req">*</span></label>
+            <select class="vip-input" id="timezone" name="timezone" required>
+              <option value="">Select...</option>
+              <option value="America/New_York (Eastern)">America/New_York (Eastern)</option>
+              <option value="America/Chicago (Central)">America/Chicago (Central)</option>
+              <option value="America/Denver (Mountain)">America/Denver (Mountain)</option>
+              <option value="America/Phoenix (Arizona)">America/Phoenix (Arizona)</option>
+              <option value="America/Los_Angeles (Pacific)">America/Los_Angeles (Pacific)</option>
+              <option value="America/Toronto">America/Toronto</option>
+              <option value="America/Vancouver">America/Vancouver</option>
+              <option value="Europe/London">Europe/London</option>
+              <option value="Europe/Paris (CET)">Europe/Paris (CET)</option>
+              <option value="Europe/Istanbul">Europe/Istanbul</option>
+              <option value="Asia/Dubai (Gulf)">Asia/Dubai (Gulf)</option>
+              <option value="Asia/Riyadh">Asia/Riyadh</option>
+              <option value="Asia/Singapore">Asia/Singapore</option>
+              <option value="Australia/Sydney">Australia/Sydney</option>
+              <option value="Other">Other (tell us in the last section)</option>
+            </select>
+            <div class="vip-warn">Please select your timezone</div>
+          </div>
+
+          <!-- BUSINESS HOURS -->
+          <div class="vip-field vip-span2">
+            <label class="vip-label">Business hours <span class="vip-req">*</span></label>
+            <p class="vip-helper" style="margin-bottom: 10px;">Set open and close times for each day, or tick "Closed".</p>
+            <div class="hours-grid" id="hoursGrid">
+              <!-- rows injected identical for each day -->
+              <div class="hours-row" data-day="mon">
+                <span class="hours-day">Mon</span>
+                <input class="vip-input hours-time" type="time" name="hours_mon_open" value="09:00">
+                <span class="hours-sep">–</span>
+                <input class="vip-input hours-time" type="time" name="hours_mon_close" value="18:00">
+                <label class="hours-closed"><input type="checkbox" name="hours_mon_closed" value="closed"> Closed</label>
+              </div>
+              <div class="hours-row" data-day="tue">
+                <span class="hours-day">Tue</span>
+                <input class="vip-input hours-time" type="time" name="hours_tue_open" value="09:00">
+                <span class="hours-sep">–</span>
+                <input class="vip-input hours-time" type="time" name="hours_tue_close" value="18:00">
+                <label class="hours-closed"><input type="checkbox" name="hours_tue_closed" value="closed"> Closed</label>
+              </div>
+              <div class="hours-row" data-day="wed">
+                <span class="hours-day">Wed</span>
+                <input class="vip-input hours-time" type="time" name="hours_wed_open" value="09:00">
+                <span class="hours-sep">–</span>
+                <input class="vip-input hours-time" type="time" name="hours_wed_close" value="18:00">
+                <label class="hours-closed"><input type="checkbox" name="hours_wed_closed" value="closed"> Closed</label>
+              </div>
+              <div class="hours-row" data-day="thu">
+                <span class="hours-day">Thu</span>
+                <input class="vip-input hours-time" type="time" name="hours_thu_open" value="09:00">
+                <span class="hours-sep">–</span>
+                <input class="vip-input hours-time" type="time" name="hours_thu_close" value="18:00">
+                <label class="hours-closed"><input type="checkbox" name="hours_thu_closed" value="closed"> Closed</label>
+              </div>
+              <div class="hours-row" data-day="fri">
+                <span class="hours-day">Fri</span>
+                <input class="vip-input hours-time" type="time" name="hours_fri_open" value="09:00">
+                <span class="hours-sep">–</span>
+                <input class="vip-input hours-time" type="time" name="hours_fri_close" value="18:00">
+                <label class="hours-closed"><input type="checkbox" name="hours_fri_closed" value="closed"> Closed</label>
+              </div>
+              <div class="hours-row" data-day="sat">
+                <span class="hours-day">Sat</span>
+                <input class="vip-input hours-time" type="time" name="hours_sat_open" value="10:00">
+                <span class="hours-sep">–</span>
+                <input class="vip-input hours-time" type="time" name="hours_sat_close" value="16:00">
+                <label class="hours-closed"><input type="checkbox" name="hours_sat_closed" value="closed"> Closed</label>
+              </div>
+              <div class="hours-row" data-day="sun">
+                <span class="hours-day">Sun</span>
+                <input class="vip-input hours-time" type="time" name="hours_sun_open" value="10:00">
+                <span class="hours-sep">–</span>
+                <input class="vip-input hours-time" type="time" name="hours_sun_close" value="16:00">
+                <label class="hours-closed"><input type="checkbox" name="hours_sun_closed" value="closed" checked> Closed</label>
+              </div>
+            </div>
+            <div class="vip-warn" id="hoursWarn">Each day needs open + close times, or tick "Closed"</div>
+          </div>
+
+          <div class="vip-field">
+            <label class="vip-label" for="quiet_start">Quiet hours — no outbound SMS after</label>
+            <input class="vip-input" type="time" id="quiet_start" name="quiet_start" value="21:00">
+            <p class="vip-helper">Default 9:00 PM local time</p>
+          </div>
+          <div class="vip-field">
+            <label class="vip-label" for="quiet_end">Quiet hours — resume SMS from</label>
+            <input class="vip-input" type="time" id="quiet_end" name="quiet_end" value="08:00">
+            <p class="vip-helper">Default 8:00 AM local time</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 2 — SERVICES & POSITIONING -->
+      <section class="vip-card" data-setup-section="2">
+        <div class="vip-card-head">
+          <div class="vip-num">02</div>
+          <div>
+            <h2 class="vip-card-title">Services &amp; Positioning</h2>
+            <p class="vip-card-sub">What you offer and how your AI should sound</p>
+          </div>
+        </div>
+        <div class="vip-grid">
+          <div class="vip-field vip-span2">
+            <label class="vip-label" for="services_list">Services offered, with average prices <span class="vip-req">*</span></label>
+            <textarea class="vip-input" id="services_list" name="services_list" rows="6" placeholder="One per line, like:
+Botox — $12/unit
+HydraFacial — $199
+Lip filler — $650
+Laser hair removal (small area) — $150" required></textarea>
+            <div class="vip-warn">Please fill this in</div>
+          </div>
+          <div class="vip-field">
+            <label class="vip-label" for="hero_service">Signature / hero service <span class="vip-req">*</span></label>
+            <input class="vip-input" type="text" id="hero_service" name="hero_service" placeholder="The one you most want booked" required>
+            <div class="vip-warn">Please fill this in</div>
+          </div>
+          <div class="vip-field">
+            <label class="vip-label" for="booking_link">Booking link <span class="vip-req">*</span></label>
+            <input class="vip-input" type="url" id="booking_link" name="booking_link" placeholder="https://... (Calendly, Vagaro page, etc.)" required>
+            <div class="vip-warn">Please enter a valid URL starting with http:// or https://</div>
+          </div>
+          <div class="vip-field vip-span2">
+            <label class="vip-label" for="sms_voice">Preferred SMS voice / greeting style <span class="vip-req">*</span></label>
+            <textarea class="vip-input" id="sms_voice" name="sms_voice" rows="3" placeholder="Describe the tone — e.g. 'Warm and professional, first-name basis, no emojis' or 'Playful and casual, light emoji use is fine'" required></textarea>
+            <div class="vip-warn">Please describe your preferred tone</div>
+          </div>
+          <div class="vip-field vip-span2">
+            <label class="vip-label" for="banned_phrases">Words or phrases the AI must NEVER use</label>
+            <textarea class="vip-input" id="banned_phrases" name="banned_phrases" rows="2" placeholder="e.g. 'cheap', 'discount', competitor names, medical claims..."></textarea>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 3 — SOFTWARE & INTEGRATIONS -->
+      <section class="vip-card" data-setup-section="3">
+        <div class="vip-card-head">
+          <div class="vip-num">03</div>
+          <div>
+            <h2 class="vip-card-title">Software &amp; Integrations</h2>
+            <p class="vip-card-sub">What we'll connect to</p>
+          </div>
+        </div>
+        <div class="vip-grid">
+          <div class="vip-field">
+            <label class="vip-label" for="booking_software">Booking software <span class="vip-req">*</span></label>
+            <select class="vip-input" id="booking_software" name="booking_software" required>
+              <option value="">Select...</option>
+              <option value="Vagaro">Vagaro</option>
+              <option value="Mindbody">Mindbody</option>
+              <option value="Boulevard">Boulevard</option>
+              <option value="Zenoti">Zenoti</option>
+              <option value="Square Appointments">Square Appointments</option>
+              <option value="Other">Other</option>
+            </select>
+            <div class="vip-warn">Please select an option</div>
+          </div>
+          <div class="vip-field">
+            <label class="vip-label" for="sms_provider">Existing SMS provider, if any</label>
+            <input class="vip-input" type="text" id="sms_provider" name="sms_provider" placeholder="e.g. Twilio, Podium, none">
+          </div>
+          <div class="vip-field">
+            <label class="vip-label" for="meta_access">Meta Business Manager — will you grant admin access? <span class="vip-req">*</span></label>
+            <select class="vip-input" id="meta_access" name="meta_access" required>
+              <option value="">Select...</option>
+              <option value="Yes">Yes</option>
+              <option value="No">No</option>
+            </select>
+            <div class="vip-warn">Please select an option</div>
+          </div>
+          <div class="vip-field">
+            <label class="vip-label" for="google_access">Google Ads — will you grant admin access? <span class="vip-req">*</span></label>
+            <select class="vip-input" id="google_access" name="google_access" required>
+              <option value="">Select...</option>
+              <option value="Yes">Yes</option>
+              <option value="No">No</option>
+            </select>
+            <div class="vip-warn">Please select an option</div>
+          </div>
+          <div class="vip-field">
+            <label class="vip-label" for="runs_ads">Does your clinic run paid ads currently?</label>
+            <select class="vip-input" id="runs_ads" name="runs_ads">
+              <option value="">Select...</option>
+              <option value="Yes">Yes</option>
+              <option value="No">No</option>
+            </select>
+          </div>
+          <div class="vip-field">
+            <label class="vip-label" for="ad_spend">Approximate monthly ad spend, if any</label>
+            <input class="vip-input" type="text" id="ad_spend" name="ad_spend" placeholder="e.g. $2,000/month">
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 4 — PATIENT DATABASE -->
+      <section class="vip-card" data-setup-section="4">
+        <div class="vip-card-head">
+          <div class="vip-num">04</div>
+          <div>
+            <h2 class="vip-card-title">Patient Database</h2>
+            <p class="vip-card-sub">The data that powers reactivation and retention</p>
+          </div>
+        </div>
+        <div class="vip-grid">
+          <div class="vip-field">
+            <label class="vip-label" for="db_size">Approximate size of existing patient database</label>
+            <select class="vip-input" id="db_size" name="db_size">
+              <option value="">Select...</option>
+              <option value="Under 500">Under 500</option>
+              <option value="500-2000">500–2,000</option>
+              <option value="2000-5000">2,000–5,000</option>
+              <option value="5000+">5,000+</option>
+            </select>
+          </div>
+          <div class="vip-field">
+            <label class="vip-label" for="csv_export">Can you export a CSV of your patient database? <span class="vip-req">*</span></label>
+            <select class="vip-input" id="csv_export" name="csv_export" required>
+              <option value="">Select...</option>
+              <option value="Yes">Yes</option>
+              <option value="No">No — I'll need help with this</option>
+            </select>
+            <div class="vip-warn">Please select an option</div>
+          </div>
+          <div class="vip-field vip-span2">
+            <label class="vip-label" for="db_csv_link">Google Drive / Dropbox link to your patient database CSV</label>
+            <input class="vip-input" type="url" id="db_csv_link" name="db_csv_link" placeholder="https://drive.google.com/... or https://www.dropbox.com/...">
+            <p class="vip-helper">
+              Upload your CSV to Google Drive or Dropbox, set sharing to "anyone with
+              the link can view", and paste the link here. (This form can't accept
+              file uploads directly.) You can also leave this blank and send it later.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 5 — COMPLIANCE & CONSENT -->
+      <section class="vip-card" data-setup-section="5">
+        <div class="vip-card-head">
+          <div class="vip-num">05</div>
+          <div>
+            <h2 class="vip-card-title">Compliance &amp; Consent</h2>
+            <p class="vip-card-sub">Required before any outbound messaging begins</p>
+          </div>
+        </div>
+        <div class="vip-grid">
+          <div class="vip-field vip-span2">
+            <label class="setup-check">
+              <input type="checkbox" name="consent_sms" id="consent_sms" value="Confirmed" required>
+              <span>
+                I confirm that all patients and leads in the database I am providing
+                have given consent to receive SMS communications from my clinic, per
+                applicable local laws (TCPA, CASL, GDPR, etc.). I understand that I am
+                solely responsible for this consent, as per the Master Services
+                Agreement Section 4.2. <span class="vip-req">*</span>
+              </span>
+            </label>
+            <div class="vip-warn" id="consentWarn">This confirmation is required</div>
+          </div>
+          <div class="vip-field vip-span2">
+            <label class="setup-check">
+              <input type="checkbox" name="msa_signed" id="msa_signed" value="Confirmed" required>
+              <span>
+                I have read and signed the cliniqboost Master Services Agreement.
+                <span class="vip-req">*</span>
+              </span>
+            </label>
+            <div class="vip-warn" id="msaWarn">This confirmation is required</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 6 — ANYTHING ELSE -->
+      <section class="vip-card" data-setup-section="6">
+        <div class="vip-card-head">
+          <div class="vip-num">06</div>
+          <div>
+            <h2 class="vip-card-title">Anything Else</h2>
+            <p class="vip-card-sub">Context that helps us set up right the first time</p>
+          </div>
+        </div>
+        <div class="vip-grid">
+          <div class="vip-field vip-span2">
+            <label class="vip-label" for="extra_notes">Anything else we should know before setup?</label>
+            <textarea class="vip-input" id="extra_notes" name="extra_notes" rows="4" placeholder="Allergies to certain marketing language, patient sensitivities, past bad experiences with automation, etc."></textarea>
+          </div>
+        </div>
+      </section>
+
+      <!-- SUBMIT -->
+      <div class="vip-submit-wrap">
+        <button type="submit" class="vip-submit">Submit Onboarding Intake →</button>
+        <p class="vip-submit-note">Everything you share stays strictly confidential.</p>
+      </div>
+    </form>
+
+    <!-- THANK-YOU STATE (hidden until success) -->
+    <div class="vip-thanks" id="setupThanks" style="display: none;">
+      <div class="vip-thanks-check">✓</div>
+      <h2>Got it, <span id="thanksClinicName">your clinic</span> is in the queue.</h2>
+      <p>
+        Your onboarding intake has been received. We'll review everything,
+        configure your system, and reach out within 2 business days with
+        your setup timeline and next steps.
+      </p>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="vip-footer">
+    Delivered by cliniqboost · cliniqboost.com
+  </footer>
+
+  <script>
+    // ===== CLIENT ONBOARDING INTAKE — draft save, progress, validation, AJAX submit =====
+    (function () {
+      const form = document.getElementById('setupForm');
+      const thanks = document.getElementById('setupThanks');
+      const progressFill = document.getElementById('setupProgressFill');
+      const progressLabel = document.getElementById('setupProgressLabel');
+      const DRAFT_KEY = 'cliniqboost_client_onboarding_v1';
+      const fields = Array.from(form.querySelectorAll('.vip-input, .setup-check input, .hours-closed input'));
+      const DAYS = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
+
+      // --- Draft save / restore (handles checkboxes + values) ---
+      function saveDraft() {
+        const draft = {};
+        fields.forEach(f => {
+          if (!f.name) return;
+          if (f.type === 'checkbox') draft[f.name] = f.checked;
+          else draft[f.name] = f.value;
+        });
+        localStorage.setItem(DRAFT_KEY, JSON.stringify(draft));
+      }
+
+      function restoreDraft() {
+        const saved = localStorage.getItem(DRAFT_KEY);
+        if (!saved) return;
+        try {
+          const draft = JSON.parse(saved);
+          fields.forEach(f => {
+            if (!f.name || draft[f.name] === undefined) return;
+            if (f.type === 'checkbox') f.checked = !!draft[f.name];
+            else f.value = draft[f.name];
+          });
+        } catch (e) { /* corrupt draft — ignore */ }
+        DAYS.forEach(syncDayRow);
+      }
+
+      // --- Business hours: "Closed" disables time fields ---
+      function syncDayRow(day) {
+        const row = document.querySelector('.hours-row[data-day="' + day + '"]');
+        const closed = row.querySelector('input[type="checkbox"]').checked;
+        row.querySelectorAll('.hours-time').forEach(t => {
+          t.disabled = closed;
+          row.classList.toggle('is-closed', closed);
+        });
+      }
+
+      DAYS.forEach(day => {
+        const row = document.querySelector('.hours-row[data-day="' + day + '"]');
+        row.querySelector('input[type="checkbox"]').addEventListener('change', () => syncDayRow(day));
+      });
+
+      // --- Progress: which section is in view (Section X of 6) ---
+      const sections = Array.from(document.querySelectorAll('[data-setup-section]'));
+
+      function updateProgress() {
+        const probe = window.scrollY + window.innerHeight * 0.35;
+        let current = 1;
+        sections.forEach(s => {
+          if (s.offsetTop <= probe) current = parseInt(s.dataset.setupSection, 10);
+        });
+        progressLabel.textContent = 'Section ' + current + ' of 6';
+        progressFill.style.width = Math.round((current / 6) * 100) + '%';
+      }
+
+      window.addEventListener('scroll', updateProgress, { passive: true });
+
+      // --- Field listeners ---
+      fields.forEach(f => {
+        ['input', 'change'].forEach(evt => {
+          f.addEventListener(evt, () => {
+            f.classList.remove('invalid');
+            const warn = f.closest('.vip-field');
+            if (warn) {
+              const w = warn.querySelector('.vip-warn');
+              if (w) w.classList.remove('force-show');
+            }
+            saveDraft();
+          });
+        });
+      });
+
+      // --- Validation ---
+      function validate() {
+        let firstInvalid = null;
+
+        function flag(el, warnEl) {
+          el.classList.add('invalid');
+          if (warnEl) warnEl.classList.add('force-show');
+          if (!firstInvalid) firstInvalid = el;
+        }
+
+        // Standard required fields
+        form.querySelectorAll('.vip-input[required]').forEach(f => {
+          const val = f.value.trim();
+          const emailBad = f.type === 'email' && val !== '' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
+          const urlBad = f.type === 'url' && val !== '' && !/^https?:\/\/.+/.test(val);
+          if (val === '' || emailBad || urlBad) {
+            flag(f, f.closest('.vip-field')?.querySelector('.vip-warn'));
+          } else {
+            f.classList.remove('invalid');
+          }
+        });
+
+        // Optional URL field format check (CSV link)
+        const csvLink = document.getElementById('db_csv_link');
+        if (csvLink.value.trim() !== '' && !/^https?:\/\/.+/.test(csvLink.value.trim())) {
+          flag(csvLink, csvLink.closest('.vip-field')?.querySelector('.vip-warn'));
+        }
+
+        // Business hours: each day either closed or both times set
+        let hoursOk = true;
+        DAYS.forEach(day => {
+          const row = document.querySelector('.hours-row[data-day="' + day + '"]');
+          const closed = row.querySelector('input[type="checkbox"]').checked;
+          const times = row.querySelectorAll('.hours-time');
+          if (!closed && (!times[0].value || !times[1].value)) {
+            hoursOk = false;
+            times.forEach(t => t.classList.add('invalid'));
+            if (!firstInvalid) firstInvalid = times[0];
+          }
+        });
+        document.getElementById('hoursWarn').classList.toggle('force-show', !hoursOk);
+
+        // Required checkboxes
+        [['consent_sms', 'consentWarn'], ['msa_signed', 'msaWarn']].forEach(([id, warnId]) => {
+          const box = document.getElementById(id);
+          const warn = document.getElementById(warnId);
+          if (!box.checked) {
+            warn.classList.add('force-show');
+            box.closest('.setup-check').classList.add('invalid-check');
+            if (!firstInvalid) firstInvalid = box;
+          } else {
+            warn.classList.remove('force-show');
+            box.closest('.setup-check').classList.remove('invalid-check');
+          }
+        });
+
+        if (firstInvalid) {
+          firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          if (firstInvalid.focus) firstInvalid.focus({ preventScroll: true });
+          return false;
+        }
+        return true;
+      }
+
+      // --- AJAX submit ---
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        if (!validate()) return;
+
+        // Interpolate clinic legal name into the email subject
+        const legalName = document.getElementById('legal_name').value.trim();
+        document.getElementById('subjectField').value =
+          'New cliniqboost client intake: ' + (legalName || 'Unknown clinic');
+
+        const btn = form.querySelector('.vip-submit');
+        btn.disabled = true;
+        btn.textContent = 'Sending...';
+
+        fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { 'Accept': 'application/json' }
+        })
+        .then(response => {
+          if (response.status === 200 || response.ok) {
+            localStorage.removeItem(DRAFT_KEY);
+            document.getElementById('thanksClinicName').textContent = legalName || 'your clinic';
+            form.style.display = 'none';
+            thanks.style.display = 'block';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          } else {
+            showError('Something went wrong. Please try again or email us directly.');
+          }
+        })
+        .catch(() => showError('Network error. Please check your connection and try again.'))
+        .finally(() => {
+          btn.disabled = false;
+          btn.textContent = 'Submit Onboarding Intake →';
+        });
+      });
+
+      function showError(msg) {
+        let banner = document.querySelector('.vip-error-banner');
+        if (!banner) {
+          banner = document.createElement('div');
+          banner.className = 'vip-error-banner';
+          form.querySelector('.vip-submit-wrap').appendChild(banner);
+        }
+        banner.textContent = msg;
+        banner.style.display = 'block';
+      }
+
+      // --- Init ---
+      restoreDraft();
+      DAYS.forEach(syncDayRow);
+      updateProgress();
+    })();
+  </script>
+</body>
+</html>
