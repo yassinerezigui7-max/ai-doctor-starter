@@ -39,9 +39,11 @@
 
   <!-- FORM -->
   <main class="vip-main">
-    <form id="setupForm" action="https://formspree.io/f/mojgalqa" method="POST" novalidate>
+    <form id="setupForm" action="https://cliniqboost-ai-production.up.railway.app/onboarding/submit" method="POST" novalidate>
       <input type="hidden" name="form_type" value="Client Onboarding Intake">
       <input type="hidden" name="_subject" id="subjectField" value="New cliniqboost client intake">
+      <!-- Honeypot — humans never see or fill this; the backend silently drops submissions that do -->
+      <input type="text" name="website_url" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;height:0;width:0;opacity:0;">
 
       <!-- SECTION 1 — CLINIC BASICS -->
       <section class="vip-card" data-setup-section="1">
@@ -418,6 +420,11 @@ Laser hair removal (small area) — $150" required></textarea>
 
   <!-- FOOTER -->
   <footer class="vip-footer">
+    <div class="vip-footer-links">
+      <a href="/privacy">Privacy Policy</a>
+      <a href="/terms">Terms of Service</a>
+      <a href="/sms-policy">SMS Policy</a>
+    </div>
     Delivered by cliniqboost · cliniqboost.com
   </footer>
 
@@ -567,14 +574,23 @@ Laser hair removal (small area) — $150" required></textarea>
       }
 
       // --- AJAX submit ---
+      // Posts JSON to the cliniqboost backend (Railway), which creates the
+      // clinic atomically and mirrors a copy to Formspree for the email.
       form.addEventListener('submit', function (e) {
         e.preventDefault();
         if (!validate()) return;
 
-        // Interpolate clinic legal name into the email subject
+        // Interpolate clinic legal name into the email subject (used by the
+        // backend's Formspree mirror)
         const legalName = document.getElementById('legal_name').value.trim();
         document.getElementById('subjectField').value =
           'New cliniqboost client intake: ' + (legalName || 'Unknown clinic');
+
+        // FormData → plain JSON object (repeated names joined with ", ")
+        const payload = {};
+        new FormData(form).forEach(function (value, key) {
+          payload[key] = key in payload ? payload[key] + ', ' + value : value;
+        });
 
         const btn = form.querySelector('.vip-submit');
         btn.disabled = true;
@@ -582,22 +598,40 @@ Laser hair removal (small area) — $150" required></textarea>
 
         fetch(form.action, {
           method: 'POST',
-          body: new FormData(form),
-          headers: { 'Accept': 'application/json' }
+          body: JSON.stringify(payload),
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }
         })
-        .then(response => {
-          if (response.status === 200 || response.ok) {
-            localStorage.removeItem(DRAFT_KEY);
-            document.getElementById('thanksClinicName').textContent = legalName || 'your clinic';
-            form.style.display = 'none';
-            thanks.style.display = 'block';
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-          } else {
-            showError('Something went wrong. Please try again or email us directly.');
-          }
+        .then(function (response) {
+          return response.json().catch(function () { return {}; }).then(function (data) {
+            if (response.ok) {
+              if (data.clinic_id) {
+                try { localStorage.setItem('cliniqboost_clinic_id', data.clinic_id); } catch (err) {}
+              }
+              localStorage.removeItem(DRAFT_KEY);
+              document.getElementById('thanksClinicName').textContent = legalName || 'your clinic';
+              form.style.display = 'none';
+              thanks.style.display = 'block';
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else if (response.status === 422 && data.errors) {
+              const fields = Object.keys(data.errors);
+              const first = fields[0];
+              showError('Please check: ' + fields.map(function (f) {
+                return f.replace(/^_/, '') + ' — ' + data.errors[f];
+              }).join(' · '));
+              const el = form.querySelector('[name="' + first + '"]');
+              if (el) {
+                el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                if (el.focus) el.focus({ preventScroll: true });
+              }
+            } else if (response.status === 429) {
+              showError('Too many attempts — please wait a few minutes and try again.');
+            } else {
+              showError('Something went wrong. Please try again or email us directly.');
+            }
+          });
         })
-        .catch(() => showError('Network error. Please check your connection and try again.'))
-        .finally(() => {
+        .catch(function () { showError('Network error. Please check your connection and try again.'); })
+        .finally(function () {
           btn.disabled = false;
           btn.textContent = 'Submit Onboarding Intake →';
         });
