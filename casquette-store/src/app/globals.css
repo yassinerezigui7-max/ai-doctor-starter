@@ -1,0 +1,193 @@
+@import "tailwindcss";
+@import "../styles/tokens.css";
+
+@theme inline {
+  --color-*: initial;
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-alt: var(--surface-alt);
+  --color-primary: var(--primary);
+  --color-primary-press: var(--primary-press);
+  --color-primary-tint: var(--primary-tint);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-white: var(--white);
+  --color-success: var(--success);
+  --color-danger: var(--danger);
+  --color-transparent: transparent;
+  --color-current: currentColor;
+
+  --font-sans: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+  /* Display and UI share one grotesk — the `font-display` hook is kept so a
+     separate display face can be reintroduced in one line. */
+  --font-display: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+
+  --radius-sm: var(--r-sm);
+  --radius-md: var(--r-md);
+  --radius-lg: var(--r-lg);
+  --radius-pill: var(--r-pill);
+
+  --shadow-card: var(--sh-card);
+  --shadow-lift: var(--sh-lift);
+
+  --ease-soft: var(--ease);
+
+  /* Headings carry their weight in the scale: Tailwind's preflight resets
+     h1–h6 to `font-weight: inherit`, and a grotesk needs 600 at display size
+     to hold the page the way the serif did at 400. */
+  --text-display: clamp(2.125rem, 1.55rem + 2.4vw, 3.25rem);
+  --text-display--line-height: 1.1;
+  --text-display--letter-spacing: -0.03em;
+  --text-display--font-weight: 600;
+  --text-h2: clamp(1.5rem, 1.34rem + 0.67vw, 2rem);
+  --text-h2--line-height: 1.15;
+  --text-h2--letter-spacing: -0.02em;
+  --text-h2--font-weight: 600;
+  --text-h3: clamp(1.125rem, 1.085rem + 0.17vw, 1.25rem);
+  --text-h3--line-height: 1.25;
+  --text-h3--letter-spacing: -0.01em;
+  --text-h3--font-weight: 600;
+  --text-body: clamp(1rem, 0.98rem + 0.08vw, 1.0625rem);
+  --text-body--line-height: 1.6;
+  --text-small: 0.875rem;
+  --text-small--line-height: 1.5;
+  --text-micro: 0.75rem;
+  --text-micro--line-height: 1.4;
+  --text-micro--letter-spacing: 0.08em;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+  font-size: var(--text-body);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  padding-bottom: var(--sticky-cta-space, 0px);
+}
+
+::selection {
+  background: var(--primary);
+  color: var(--white);
+}
+
+/* Visible focus everywhere, never removed without replacement */
+:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+@layer components {
+  .eyebrow {
+    font-size: var(--text-micro);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: var(--muted);
+  }
+
+  /* Scroll reveal (IntersectionObserver adds .is-revealed once at 15% visibility) */
+  .reveal {
+    opacity: 0;
+    translate: 0 16px;
+    transition:
+      opacity var(--dur-reveal) var(--ease),
+      translate var(--dur-reveal) var(--ease);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+  .reveal.is-revealed {
+    opacity: 1;
+    translate: 0 0;
+  }
+
+  /* Skeleton shimmer — quiet, uses only --surface/--line */
+  .shimmer {
+    background: linear-gradient(
+      100deg,
+      var(--surface) 40%,
+      var(--line) 50%,
+      var(--surface) 60%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.6s var(--ease) infinite;
+  }
+  @keyframes shimmer {
+    from {
+      background-position: 120% 0;
+    }
+    to {
+      background-position: -80% 0;
+    }
+  }
+
+  /* Modal / toast entrances */
+  @keyframes modal-fade {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  @keyframes modal-pop {
+    from {
+      opacity: 0;
+      translate: 0 12px;
+      scale: 0.98;
+    }
+    to {
+      opacity: 1;
+      translate: 0 0;
+      scale: 1;
+    }
+  }
+  @keyframes toast-in {
+    from {
+      opacity: 0;
+      translate: 0 8px;
+    }
+    to {
+      opacity: 1;
+      translate: 0 0;
+    }
+  }
+
+  /* Number cross-fade for summary values */
+  @keyframes num-swap {
+    from {
+      opacity: 0;
+      translate: 0 4px;
+    }
+    to {
+      opacity: 1;
+      translate: 0 0;
+    }
+  }
+  .num-swap {
+    animation: num-swap var(--dur-micro) var(--ease);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal {
+    translate: 0 0;
+  }
+}
