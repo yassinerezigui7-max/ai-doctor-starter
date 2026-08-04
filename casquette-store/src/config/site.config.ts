@@ -88,7 +88,12 @@ const rawConfig = {
   order: {
     endpoint: process.env.NEXT_PUBLIC_ORDER_ENDPOINT ?? "",
     idPrefix: "CAP",
-    timeoutMs: 12000,
+    /**
+     * Apps Script waits up to 20s on its own script lock, and observed replies
+     * have ranged 3–10.5s. A 12s abort was close enough to that ceiling to show
+     * customers a failure for an order that actually saved.
+     */
+    timeoutMs: 20000,
     retries: 2,
     defaultStatus: "New",
   },

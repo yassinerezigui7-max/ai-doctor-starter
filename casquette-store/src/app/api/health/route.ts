@@ -9,7 +9,7 @@ import { NextResponse } from "next/server";
  */
 export const dynamic = "force-dynamic";
 
-export async function GET(): Promise<NextResponse> {
+export async function GET(request: Request): Promise<NextResponse> {
   const endpoint = process.env.ORDER_ENDPOINT ?? "";
   const token = process.env.ORDER_TOKEN ?? "";
   const publicEndpoint = process.env.NEXT_PUBLIC_ORDER_ENDPOINT ?? "";
@@ -45,6 +45,19 @@ export async function GET(): Promise<NextResponse> {
       ].filter(Boolean),
       siteUrl: process.env.URL ?? process.env.NEXT_PUBLIC_SITE_URL ?? null,
       builtAt: process.env.BUILD_ID ?? null,
+      /**
+       * Which IP header this host actually sends. If every entry is null the
+       * rate limiter cannot identify callers and deliberately stops limiting,
+       * rather than lumping all customers into one bucket.
+       */
+      rateLimiting: {
+        detected: [
+          "x-nf-client-connection-ip",
+          "x-forwarded-for",
+          "x-real-ip",
+        ].find((h) => request.headers.get(h)) ?? "none — rate limiting disabled",
+        maxPer10Min: 30,
+      },
     },
     { headers: { "Cache-Control": "no-store", "X-Robots-Tag": "noindex" } },
   );
