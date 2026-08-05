@@ -1,0 +1,35 @@
+/* Design tokens — single source of truth for the visual system.
+   Palette: white · near-black · navy #133458. Nothing warm anywhere.
+   Contrast is measured, not assumed — see the table in DECISIONS.md. */
+:root {
+  --bg: #ffffff;
+  --surface: #f6f7f9; /* cards, inputs */
+  --surface-alt: #eef1f4; /* alternating section bands, image plates */
+  --primary: #133458;
+  --primary-press: #0d2440;
+  --primary-tint: rgba(19, 52, 88, 0.06); /* selected states, discount pill, scrim */
+  --ink: #0f1417; /* body text — near-black, not pure */
+  --muted: #5a6472; /* secondary text — 6.00:1 on --bg */
+  --line: #e2e6eb; /* decorative hairlines only — 1.25:1, never a control edge */
+  /* Boundaries of interactive controls — inputs, selects, radio cards, chips.
+     WCAG 1.4.11 needs ≥3:1 there; this clears it on bg/surface/surface-alt
+     (3.51 / 3.27 / 3.10). Do not swap it for --line. */
+  --line-strong: #7e8a99;
+  --white: #ffffff;
+  --success: #1b5e43;
+  --danger: #8a2f2a;
+
+  --r-sm: 10px;
+  --r-md: 16px;
+  --r-lg: 24px;
+  --r-pill: 999px;
+
+  /* Same geometry as before; the tint is neutralised to --ink, not warm brown. */
+  --sh-card: 0 1px 2px rgba(15, 20, 23, 0.04), 0 8px 24px rgba(15, 20, 23, 0.06);
+  --sh-lift: 0 2px 4px rgba(15, 20, 23, 0.05), 0 16px 40px rgba(15, 20, 23, 0.1);
+
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --dur-micro: 180ms;
+  --dur-reveal: 320ms;
+  --dur-modal: 480ms;
+}
