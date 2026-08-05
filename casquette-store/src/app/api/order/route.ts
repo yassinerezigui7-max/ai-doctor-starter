@@ -14,8 +14,34 @@ import { findWilaya } from "@/data/wilayas";
  */
 
 const WINDOW_MS = 10 * 60 * 1000;
-const MAX_PER_WINDOW = 5;
+/**
+ * Deliberately generous. Algerian mobile carriers put many subscribers behind
+ * one public IP (CGNAT), so a tight per-IP cap rejects genuine buyers. This is
+ * abuse damping, not the security boundary — the shared token, the server-side
+ * price recomputation and the Apps Script duplicate check are.
+ */
+const MAX_PER_WINDOW = 30;
 const hits = new Map<string, number[]>();
+
+/**
+ * Netlify does not always send x-forwarded-for; without a fallback every
+ * visitor collapses into one "unknown" bucket and a handful of orders would
+ * lock out the whole country. Returns null when the client cannot be
+ * identified, and the caller then declines to rate limit at all.
+ */
+function clientIp(request: Request): string | null {
+  const candidates = [
+    request.headers.get("x-nf-client-connection-ip"), // Netlify
+    request.headers.get("x-forwarded-for")?.split(",")[0],
+    request.headers.get("x-real-ip"),
+    request.headers.get("cf-connecting-ip"),
+  ];
+  for (const c of candidates) {
+    const ip = c?.trim();
+    if (ip) return ip;
+  }
+  return null;
+}
 
 function rateLimited(ip: string): boolean {
   const now = Date.now();
@@ -94,9 +120,10 @@ function logForwarded(body: Record<string, unknown>, duplicate: boolean) {
 }
 
 export async function POST(request: Request): Promise<NextResponse> {
-  const ip =
-    request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";
-  if (rateLimited(ip)) {
+  // Fail OPEN: an unidentifiable client is never blocked. Losing a real
+  // cash-on-delivery order costs far more than absorbing a few extra requests.
+  const ip = clientIp(request);
+  if (ip !== null && rateLimited(ip)) {
     return NextResponse.json({ ok: false, code: "rate_limited" }, { status: 429 });
   }
 
